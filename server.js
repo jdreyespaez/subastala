@@ -7,7 +7,7 @@ var app        = express(); 				// define our app using express
 var bodyParser = require('body-parser'); 	// get body-parser
 var morgan     = require('morgan'); 		// used to see requests
 var mongoose   = require('mongoose');
-//== FALTA USER
+var User       = require('./app/models/user');
 var port       = process.env.PORT || 8080; // set the port for our app
 
 // APP CONFIGURATION ---------------------
@@ -27,6 +27,9 @@ app.use(function(req, res, next) {
 app.use(morgan('dev'));
 
 //== AQUÍ VENDRÁ LA CONEXIÓN A LA BASE DE DATOS
+
+// connect to our database (SE ALOJARÁ EN MODULUS.IO)
+	mongoose.connect('mongodb://reyespaez:subastala@proximus.modulusmongo.net:27017/yj3umitU');
 
 // ROUTES FOR OUR API
 // ======================================
@@ -50,6 +53,7 @@ apiRouter.get('/', function(req, res) {
 //== MÁS RUTAS DE LA API ESTARÁN ACÁ
 
 // REGISTER OUR ROUTES -------------------------------
+// Comentario: en esta parte se está definiendo cómo será el URl por default, para este caso es /api
 app.use('/api', apiRouter);
 
 // START THE SERVER
